@@ -1,0 +1,14 @@
+#%RAML 1.0 Library
+types:
+  message:
+    description:
+    properties:
+      status:
+        description: "Error status code"
+        type: string
+      message:
+        description: "Error message"
+        type: string
+      type:
+          description: "CRITICAL / FATAL / ERROR / WARNING"
+          type: string
