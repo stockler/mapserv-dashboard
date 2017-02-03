@@ -1,0 +1,21 @@
+#%RAML 1.0 Library
+
+traits:
+  pageable:
+    queryParameters:
+      page:
+        type: integer
+        default: 0
+        example: 1
+        required: false
+      pageSize:
+        type: integer
+        default: 10
+        example: 10
+        required: false
+  searchable:
+    queryParameters:
+      q:
+        type: string
+        required: false
+        example: shp geotiff png

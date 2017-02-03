@@ -1,0 +1,45 @@
+#%RAML 1.0 Library
+
+uses:
+  traitsLib: traits.lib.raml
+  typesLib: types.lib.raml
+
+
+resourceTypes:
+  base:
+    get:
+      responses:
+        200:
+          description: Get all
+  read-only-collection:
+    type: base
+    get:
+      is: [traitsLib.pageable]
+  collection:
+    type: read-only-collection
+    post:      
+      responses:
+        201:
+          description: Created!
+          headers:
+            Location:
+              description: uri of new resource
+              type: string
+              required: true
+  member:
+    get:
+      responses:
+        200:
+          description: Get member
+    put?:
+      responses:
+        204:
+          description: Modified
+    patch?:
+      responses:
+        204:
+          description: Modified
+    delete?:
+      responses:
+        204:
+          description: Delete

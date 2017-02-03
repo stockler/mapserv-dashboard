@@ -1,0 +1,66 @@
+#%RAML 1.0 Library
+
+uses:
+  annotations: annotations.lib.raml
+  
+types:
+  ResourceLink:
+    type: object
+    properties:
+      href: string
+      rel:
+        enum: [self, next, prev]
+      method?:
+        default: get
+        
+  Mapserv:
+    type: object
+    description: "Mapserv data"
+    properties:
+      data:
+        description: "Data from mapserv"
+        type: string
+        
+  Workspace:
+    type: object
+    properties:
+      name: string
+      links: ResourceLink[]  
+
+  GetWorkspacesResponse:
+    type: object
+    properties:
+      links: ResourceLink[]
+      collection:
+        properties:
+          size: integer
+          workspaces: Workspace[]      
+                
+  PostWorkspacesRequest:
+    type: object
+    properties:
+      name: string
+    example:
+      name: bacias
+                    
+  GetWorkspaceResponse:
+    type: Workspace    
+    example:
+      links:
+        - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/bacias
+          rel: self      
+      name: bacias  
+      
+  PutWorkspaceRequest:
+    type: object
+    properties:
+      name: string
+    example:
+      name: bacias   
+      
+  PatchWorkspaceRequest:
+    type: object
+    properties:
+      name: string
+    example:
+      name: bacias   

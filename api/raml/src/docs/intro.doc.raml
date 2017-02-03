@@ -1,0 +1,65 @@
+#%RAML 1.0 DocumentationItem
+  title: Introduction
+  content: |
+   
+    # Innovation Layer / Bi-Modal
+    Mapserver Web API, Designed to be the central point of access to all layers services serving by WMS using MapServer.
+    
+    # Resource Hierarchy
+    
+    The resources are in part independent of the user browsing them
+    
+    * /workspaces    
+    
+    All return application/json as Response media-type and all accept only application/json as request media-type.
+    
+    # Hypermedia
+    
+    The usual form of each response is to include a links array with a number of objects of the form:
+    
+    **href**: the url
+    
+    **rel**:  the meaning of the url (prev, next, self, etc.)
+    
+    **label**: UI label
+    
+    ```json
+        "links": [
+            {
+                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=28&pageSize=7",
+                "rel": "next"
+            },
+            {
+                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=14&pageSize=7",
+                "rel": "prev"
+            },
+            {
+                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces",
+                "rel": "self"
+            }
+        ]
+    ```
+    
+    If the response is a collection object, it will have a links array at the root and for each workspace in the workspaces array.
+    
+    ```json
+      "collection": {
+        "size": 7,
+        "workspaces": [
+          {              
+              "name": "bacias",
+              "links": [
+                  {
+                      "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/bacias",
+                      "rel": "self"
+                  }
+              ]
+          },
+          { ...
+    ```
+    
+    # API Manager
+    
+    Registered both as a Service with the OAuth 2.0 Access Token Enforcement policy applied, and also as a Consumer of 
+    
+    * Workspace Service

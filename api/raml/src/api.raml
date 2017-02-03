@@ -1,7 +1,80 @@
 #%RAML 1.0
-title: API Dashboard Mapserv
+title: API Dashboard Mapserv 
 version: v1
-baseUri: https://api-dashboard-mapserv.herokuapp.com/{version}
 
-resourceTypes:
-  base: !include ./resourceTypes/base.raml
+baseUri:
+  value: http://{environment}-dashboard-mapserv.herokuapp.com/{version}
+  
+baseUriParameters:
+  environment:
+    type: string
+    enum: [ "stg", "dev", "test", "prod" ]
+    
+protocols: [ HTTP, HTTPS ]
+mediaType: [ application/json ]
+documentation:
+  - !include docs/intro.doc.raml
+  
+uses:
+  resourceTypesLib: modules/resource-types.lib.raml
+  traitsLib: modules/traits.lib.raml
+  
+/workspaces:
+  type: resourceTypesLib.collection  
+  get:
+    description: List of all workspaces
+    is: [traitsLib.searchable, traitsLib.pageable]
+    responses:
+      200:
+        body:
+          application/json:
+            type: resourceTypesLib.typesLib.GetWorkspacesResponse
+            example: 
+              links:
+                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=30&pageSize=10
+                  rel: next
+                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=10&pageSize=10
+                  rel: prev
+                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=20&pageSize=10
+                  rel: self
+              collection:
+                size: 2
+                workspaces:
+                  - name: bacias
+                    links:
+                      - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/bacias
+                        rel: self
+                  - name: Cidades            
+                    links:
+                      - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/Cidades
+                        rel: self    
+  post:
+    description: Add an Workspace to my Workspace List.  
+    body:
+      type: resourceTypesLib.typesLib.PostWorkspacesRequest  
+  /{workspace}:
+    type: resourceTypesLib.member
+    get:
+      description: Get Workspace from workspace list
+      responses:
+        200:
+          body:
+            application/json:
+              type: resourceTypesLib.typesLib.GetWorkspaceResponse
+    put:
+      description: Update Workspace
+      body:
+        type: resourceTypesLib.typesLib.PutWorkspaceRequest  
+    delete:
+      description: Remove from wish list
+      
+/mapserv:
+  #type: [base]
+  get:
+    responses:
+      200:
+        description: Mapserv.
+        body:
+          application/json:
+            type: resourceTypesLib.typesLib.Mapserv
+            example: !include ./examples/200_mapserv.raml 
