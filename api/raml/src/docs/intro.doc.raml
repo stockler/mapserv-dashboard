@@ -9,7 +9,7 @@
     
     The resources are in part independent of the user browsing them
     
-    * /workspaces    
+    * /maps    
     
     All return application/json as Response media-type and all accept only application/json as request media-type.
     
@@ -26,31 +26,31 @@
     ```json
         "links": [
             {
-                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=28&pageSize=7",
+                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps?pageIndex=28&pageSize=7",
                 "rel": "next"
             },
             {
-                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=14&pageSize=7",
+                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps?pageIndex=14&pageSize=7",
                 "rel": "prev"
             },
             {
-                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces",
+                "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps",
                 "rel": "self"
             }
         ]
     ```
     
-    If the response is a collection object, it will have a links array at the root and for each workspace in the workspaces array.
+    If the response is a collection object, it will have a links array at the root and for each workspace in the maps array.
     
     ```json
       "collection": {
         "size": 7,
-        "workspaces": [
+        "maps": [
           {              
               "name": "bacias",
               "links": [
                   {
-                      "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/bacias",
+                      "href": "http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps/bacias",
                       "rel": "self"
                   }
               ]
@@ -62,4 +62,4 @@
     
     Registered both as a Service with the OAuth 2.0 Access Token Enforcement policy applied, and also as a Consumer of 
     
-    * Workspace Service
+    * Maps Service

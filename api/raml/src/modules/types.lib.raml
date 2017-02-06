@@ -21,44 +21,44 @@ types:
         description: "Data from mapserv"
         type: string
         
-  Workspace:
+  Map:
     type: object
     properties:
       name: string
       links: ResourceLink[]  
 
-  GetWorkspacesResponse:
+  GetMapsResponse:
     type: object
     properties:
       links: ResourceLink[]
       collection:
         properties:
           size: integer
-          workspaces: Workspace[]      
+          maps: Map[]      
                 
-  PostWorkspacesRequest:
+  PostMapsRequest:
     type: object
     properties:
       name: string
     example:
       name: bacias
                     
-  GetWorkspaceResponse:
-    type: Workspace    
+  GetMapResponse:
+    type: Map    
     example:
       links:
-        - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/bacias
+        - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps/bacias
           rel: self      
       name: bacias  
       
-  PutWorkspaceRequest:
+  PutMapRequest:
     type: object
     properties:
       name: string
     example:
       name: bacias   
       
-  PatchWorkspaceRequest:
+  PatchMapRequest:
     type: object
     properties:
       name: string

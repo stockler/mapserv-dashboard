@@ -19,54 +19,63 @@ uses:
   resourceTypesLib: modules/resource-types.lib.raml
   traitsLib: modules/traits.lib.raml
   
-/workspaces:
+/maps:
   type: resourceTypesLib.collection  
   get:
-    description: List of all workspaces
+    description: List of all maps
     is: [traitsLib.searchable, traitsLib.pageable]
     responses:
       200:
         body:
           application/json:
-            type: resourceTypesLib.typesLib.GetWorkspacesResponse
+            type: resourceTypesLib.typesLib.GetMapsResponse
             example: 
               links:
-                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=30&pageSize=10
+                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps?pageIndex=30&pageSize=10
                   rel: next
-                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=10&pageSize=10
+                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps?pageIndex=10&pageSize=10
                   rel: prev
-                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces?pageIndex=20&pageSize=10
+                - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps?pageIndex=20&pageSize=10
                   rel: self
               collection:
                 size: 2
-                workspaces:
+                maps:
                   - name: bacias
                     links:
-                      - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/bacias
+                      - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps/bacias
                         rel: self
                   - name: Cidades            
                     links:
-                      - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/workspaces/Cidades
+                      - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps/Cidades
                         rel: self    
   post:
-    description: Add an Workspace to my Workspace List.  
+    description: Add an Map to my Maps List.  
     body:
-      type: resourceTypesLib.typesLib.PostWorkspacesRequest  
-  /{workspace}:
+      type: resourceTypesLib.typesLib.PostMapsRequest  
+  /{map}:
     type: resourceTypesLib.member
     get:
-      description: Get Workspace from workspace list
+      description: Get Map from Maps list
       responses:
         200:
           body:
             application/json:
-              type: resourceTypesLib.typesLib.GetWorkspaceResponse
+              type: resourceTypesLib.typesLib.GetMapResponse
+              example: 
+                links:
+                  - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps/Cidades
+                    rel: next
+                  - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps/Estados
+                    rel: prev
+                  - href: http://prod-dashboard-mapserv.herokuapp.com/rest/v1/maps/bacias
+                    rel: self
+                name: bacias
     put:
-      description: Update Workspace
+      description: Update Map
       body:
-        type: resourceTypesLib.typesLib.PutWorkspaceRequest  
+        type: resourceTypesLib.typesLib.PutMapRequest  
     delete:
-      description: Remove from wish list
+      description: Remove from Maps list
       
 /mapserv:
   #type: [base]
